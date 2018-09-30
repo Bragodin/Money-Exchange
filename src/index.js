@@ -9,46 +9,29 @@ module.exports = function makeExchange(currency) {
         return {error: "You are rich, my friend! We don't have so much coins for exchange"};
     }
     const object = {};
-    for(let i = 0; i <= 10000; i++){
-        // let sum = (object["H"] * 50) + (object["Q"] * 25) + (object["D"] *10) + (object["N"] * 5) + object.["P"];
-        if ((i * 50) <= currency && ((i + 1) * 50) > currency){
-            object["H"] = i;
-        }
-        else {
-            delete object["H"];
-        }
+    let h = Math.floor(currency / 50);
+    currency = currency % 50;
+    if (h > 0){
+        object.H = h;
     }
-    for(let k = 0; k <= 10000; k++){
-        if ((object["H"] * 50) + (k * 25) <= currency && ((object["H"] * 50) + ((k + 1) * 25)) > currency){
-            object["Q"] = k;
-        }
-        else{
-            delete object["Q"];
-        }
+    let q = Math.floor(currency / 25);
+    currency = currency % 25;
+    if (q > 0){
+        object.Q = q;
     }
-    for(let f = 0; f <= 10000; f++){
-        if ((object["H"] * 50) + (object["Q"] * 25) + (f * 10) <= currency && ((object["H"] * 50) + (object["Q"] * 25) + ((f + 1) * 10)) > currency){
-            object["D"] = f;
-        }
-        else {
-            delete object["D"];
-        }
+    let d = Math.floor(currency / 10);
+    currency = currency % 10;
+    if (d > 0){
+        object.D = d;
     }
-    for(let z = 0; z <= 10000; z++){
-        if ((object["H"] * 50) + (object["Q"] * 25) + (object["D"] * 10) + (z * 5) <= currency && (object["H"] * 50) + (object["Q"] * 25) + (object["D"] * 10)+ ((z + 1) * 5 > currency)){
-            object["N"] = z;
-        }
-        else {
-            delete object["N"]; 
-        }
+    let n = Math.floor(currency / 5);
+    currency = currency % 5;
+    if (n > 0){
+        object.N = n;
     }
-    for(let g = 0; g <= 10000; g++){
-        if ((object["H"] * 50) + (object["Q"] * 25) + (object["D"] * 10) + (object["N"] * 5) + (g * 1) == currency){
-            object["P"] = g;
-        }
-        else{
-            delete object["P"];
-        }
+    let p = currency;
+    if (p > 0){
+        object.P = p;
     }
-      return object;
+    return object;
 }
